@@ -10,10 +10,13 @@ import Foundation
 
 final class DataManager: DataManagerProtocol {
     
+    var delay: Double = 2
+    
+    // MARK: - Data keys
+    
     static let postsDataKey = "Posts"
     static let userDataKey = "User"
     
-    var delay: Double = 2
     
     // MARK: - Operation queues
     
@@ -47,11 +50,13 @@ final class DataManager: DataManagerProtocol {
     init() {
         
         if UserDefaults.standard.object(forKey: DataManager.postsDataKey) == nil {
-            Generator().generateAndSaveRandomPosts()
+            let currentPosts = Generator().generateAndSaveRandomPosts()
+            saveChangesInUserDefaults(data: currentPosts, dataKey: DataManager.postsDataKey)
         }
         
         if UserDefaults.standard.object(forKey: DataManager.userDataKey) == nil {
-            Generator().generateAndSaveRandomUser()
+            let currentUser = Generator().generateAndSaveRandomUser()
+            saveChangesInUserDefaults(data: currentUser, dataKey: DataManager.userDataKey)
         }
     }
     

@@ -16,7 +16,7 @@ final class Generator {
     /// Generate random user
     ///
     /// - Returns: random user
-    func generateAndSaveRandomUser() {
+    func generateAndSaveRandomUser() -> User {
         
         let names = ["Володя", "Сергей", "Анатолий", "Евдаким", "Владос"]
         let surnames = ["Белый", "Иванов", "Петров", "Ротенберг", "Круглый"]
@@ -39,16 +39,14 @@ final class Generator {
             school: schools[Int(arc4random_uniform(UInt32(schools.count)))]
         )
 
-        let archiver = NSKeyedArchiver.archivedData(withRootObject: user)
-        UserDefaults.standard.set(archiver, forKey: DataManager.userDataKey)
-        UserDefaults.standard.synchronize()
+        return user
     }
     
     
     /// Generate random collection of posts
     ///
     /// - Returns: return array of 20 random news posts
-    func generateAndSaveRandomPosts() {
+    func generateAndSaveRandomPosts() -> [Post]{
         
         let postsCount = 30
         
@@ -84,10 +82,7 @@ final class Generator {
             ))
         }
         
-        let resultPosts = posts.filter { (post) in !(post.postImageLink == "" && post.postText == "") }
-        let archiver = NSKeyedArchiver.archivedData(withRootObject: resultPosts)
-        UserDefaults.standard.set(archiver, forKey: DataManager.postsDataKey)
-        UserDefaults.standard.synchronize()
+        return posts.filter { (post) in !(post.postImageLink == "" && post.postText == "") }
     }
   
     
