@@ -8,35 +8,48 @@
 
 import Foundation
 
-/// - Parameters:
-///   - name: user name
-//    - surname: user surname
-//    - age: user age
-//    - status: user status
-//    - city: where user from
-//    - pageStatus: status of user account
-//    - avatar: user avatar
-//    - phone: user phone
-//    - school: graduated from
-//    - hobbies: user hobbies
-//    - instagramLink: user instagram page
-//    - facebookLink: user facebook page
-//    - vkLink: user vk page
+// User model
 class User: NSObject, NSCoding {
     
+    // User name
     @objc var name: String
+    
+    // User surname
     @objc var surname: String
+    
+    // User age
     @objc var age: Int
+    
+    // User status
     @objc var status: String
+    
+    // Where user from
     @objc var city: String
+    
+    // Status of user account
     @objc var pageStatus: String
+    
+    // User main photo
     @objc var avatar: String
+    
+    // Phone number
     @objc var phone: String
+    
+    // Graduated from
     @objc var school: String
+    
+    // User hobbies
     @objc var hobbies: String
+    
+    // User instagram page
     @objc var instagramLink: String
+    
+    // User facebook page
     @objc var facebookLink: String
+    
+    // User vk page
     @objc var vkLink: String
+    
     
     init(name: String, surname: String, age: Int, status: String, city: String, pageStatus: String, avatar: String, phone: String, school: String) {
         self.name = name

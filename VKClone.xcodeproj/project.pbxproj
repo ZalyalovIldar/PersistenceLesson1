@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4B23C1BA218EE013006D0115 /* DataManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B23C1B9218EE013006D0115 /* DataManagerProtocol.swift */; };
 		4B23C1BC218EE21A006D0115 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B23C1BB218EE21A006D0115 /* DataManager.swift */; };
-		4B23C1BE218EE2E7006D0115 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B23C1BD218EE2E7006D0115 /* Model.swift */; };
+		4B23C1BE218EE2E7006D0115 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B23C1BD218EE2E7006D0115 /* Post.swift */; };
 		4B23C1C0218EE315006D0115 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B23C1BF218EE315006D0115 /* User.swift */; };
 		4B23C1C2218EE3B8006D0115 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B23C1C1218EE3B8006D0115 /* Extensions.swift */; };
 		4B23C1C4218EF7CD006D0115 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B23C1C3218EF7CD006D0115 /* Generator.swift */; };
@@ -29,7 +29,7 @@
 /* Begin PBXFileReference section */
 		4B23C1B9218EE013006D0115 /* DataManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerProtocol.swift; sourceTree = "<group>"; };
 		4B23C1BB218EE21A006D0115 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		4B23C1BD218EE2E7006D0115 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		4B23C1BD218EE2E7006D0115 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		4B23C1BF218EE315006D0115 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4B23C1C1218EE3B8006D0115 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4B23C1C3218EF7CD006D0115 /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 				4B23C1BB218EE21A006D0115 /* DataManager.swift */,
 				4B23C1B9218EE013006D0115 /* DataManagerProtocol.swift */,
 				4B23C1C3218EF7CD006D0115 /* Generator.swift */,
-				4B23C1BD218EE2E7006D0115 /* Model.swift */,
+				4B23C1BD218EE2E7006D0115 /* Post.swift */,
 				4B23C1BF218EE315006D0115 /* User.swift */,
 				4B23C1C1218EE3B8006D0115 /* Extensions.swift */,
 			);
@@ -206,7 +206,7 @@
 				4BDB61252166379900757934 /* NewsViewController.swift in Sources */,
 				4B23C1C2218EE3B8006D0115 /* Extensions.swift in Sources */,
 				4B23C1C0218EE315006D0115 /* User.swift in Sources */,
-				4B23C1BE218EE2E7006D0115 /* Model.swift in Sources */,
+				4B23C1BE218EE2E7006D0115 /* Post.swift in Sources */,
 				4B8C5E05216672570028EA03 /* DetailUserInfoViewController.swift in Sources */,
 				4B23C1C4218EF7CD006D0115 /* Generator.swift in Sources */,
 			);

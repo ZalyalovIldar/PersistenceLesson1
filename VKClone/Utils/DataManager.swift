@@ -10,8 +10,10 @@ import Foundation
 
 final class DataManager: DataManagerProtocol {
     
-    static let modelsDataKey = "Models"
+    static let postsDataKey = "Posts"
     static let userDataKey = "User"
+    
+    var delay: Double = 2
     
     // MARK: - Operation queues
     
@@ -44,8 +46,8 @@ final class DataManager: DataManagerProtocol {
     
     init() {
         
-        if UserDefaults.standard.object(forKey: DataManager.modelsDataKey) == nil {
-            Generator().generateAndSaveRandomModels()
+        if UserDefaults.standard.object(forKey: DataManager.postsDataKey) == nil {
+            Generator().generateAndSaveRandomPosts()
         }
         
         if UserDefaults.standard.object(forKey: DataManager.userDataKey) == nil {
@@ -54,8 +56,11 @@ final class DataManager: DataManagerProtocol {
     }
     
     
-    // MARK: - Obtain user and models
+    // MARK: - Obtain user and posts
     
+    /// Returns current user
+    ///
+    /// - Returns: current user
     func obtainUser() -> User? {
         
         if let currentUserData = UserDefaults.standard.data(forKey: DataManager.userDataKey) {
@@ -69,136 +74,157 @@ final class DataManager: DataManagerProtocol {
         return nil
     }
     
-    func obtainData(completionBlock: @escaping ([Model]) -> Void) {
+    /// Returns current posts
+    ///
+    /// - Parameter completionBlock: block for returning posts
+    func obtainData(completionBlock: @escaping ([Post]) -> Void) {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            if let currentModelsData = UserDefaults.standard.data(forKey: DataManager.modelsDataKey) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            if let currentPostsData = UserDefaults.standard.data(forKey: DataManager.postsDataKey) {
                 
-                guard let currentModels = NSKeyedUnarchiver.unarchiveObject(with: currentModelsData) as? [Model]
+                guard let currentPosts = NSKeyedUnarchiver.unarchiveObject(with: currentPostsData) as? [Post]
                 else { return completionBlock([]) }
                 
-                completionBlock(currentModels)
+                completionBlock(currentPosts)
             }
         }
     }
     
     
-    // MARK: - Search model
+    // MARK: - Search post
     
-    func syncSearchModel(id: String) -> Model? {
+    /// Search post by given id
+    ///
+    /// - Parameter id: identificator
+    /// - Returns: post with given id
+    func searchPost(by id: String) -> Post? {
         
-        if let currentModelsData = UserDefaults.standard.data(forKey: DataManager.modelsDataKey) {
+        if let currentPostsData = UserDefaults.standard.data(forKey: DataManager.postsDataKey) {
             
-            guard let currentModels = NSKeyedUnarchiver.unarchiveObject(with: currentModelsData) as? [Model]
+            guard let currentPosts = NSKeyedUnarchiver.unarchiveObject(with: currentPostsData) as? [Post]
                 else { return nil }
             
-            return currentModels.filter{ model in model.id == id}[0]
+            let result = currentPosts.filter{ post in post.id == id }
+            
+            if result.count != 0 {
+                return result.first
+            }
+            
+            return nil
         }
         
         return nil
     }
     
-    func asyncSearchModel(id: String, completionBlock: @escaping (Model?) -> Void) {
+    /// Async version of searching post by given id
+    ///
+    /// - Parameter id: identificator
+    ///   - completionBlock: for returning post with given id
+    func asyncSearchPost(by id: String, completionBlock: @escaping (Post?) -> Void) {
         searchOperationQueue.addOperation {
 
-            if let currentModelsData = UserDefaults.standard.data(forKey: DataManager.modelsDataKey) {
+            if let currentPostsData = UserDefaults.standard.data(forKey: DataManager.postsDataKey) {
                 
-                guard let currentModels = NSKeyedUnarchiver.unarchiveObject(with: currentModelsData) as? [Model]
+                guard let currentPosts = NSKeyedUnarchiver.unarchiveObject(with: currentPostsData) as? [Post]
                     else { return completionBlock(nil) }
                 
-                completionBlock(currentModels.filter{ model in model.id == id}[0])
+                completionBlock(currentPosts.filter{ post in post.id == id}[0])
             }
         }
     }
     
 
-    // MARK: - Add model
+    // MARK: - Add post
     
-    func syncAddModel(model: Model) {
+    /// Add new post
+    ///
+    /// - Parameter post: new post
+    func addPost(_ post: Post) {
         
-        if let currentModelsData = UserDefaults.standard.data(forKey: DataManager.modelsDataKey) {
+        if let currentPostsData = UserDefaults.standard.data(forKey: DataManager.postsDataKey) {
             
-            guard var currentModels = NSKeyedUnarchiver.unarchiveObject(with: currentModelsData) as? [Model] else { return }
+            guard var currentPosts = NSKeyedUnarchiver.unarchiveObject(with: currentPostsData) as? [Post] else { return }
             
             // add to top of list
-            var newModels: [Model] = [model]
-            newModels += currentModels
-            currentModels = newModels
+            var newPosts: [Post] = [post]
+            newPosts += currentPosts
+            currentPosts = newPosts
             
             // save in UserDefaults
-            let archiver = NSKeyedArchiver.archivedData(withRootObject: currentModels)
-            UserDefaults.standard.set(archiver, forKey: DataManager.modelsDataKey)
-            UserDefaults.standard.synchronize()
+            saveChangesInUserDefaults(data: currentPosts, dataKey: DataManager.postsDataKey)
         }
     }
     
-    func asyncAddModel(model: Model, completionBlock: @escaping () -> (Bool)) {
+    /// Async version of adding post
+    ///
+    /// - Parameters:
+    ///   - post: new post
+    ///   - completionBlock: for returning result of operation
+    func asyncAddPost(_ post: Post, completionBlock: @escaping (Bool) -> ()) {
         addOperationQueue.addOperation {
             
-            if let currentModelsData = UserDefaults.standard.data(forKey: DataManager.modelsDataKey) {
-                
-                guard var currentModels = NSKeyedUnarchiver.unarchiveObject(with: currentModelsData) as? [Model] else { return }
-                
-                // add to top of list
-                var newModels: [Model] = [model]
-                newModels += currentModels
-                currentModels = newModels
-                
-                // save in UserDefaults
-                let archiver = NSKeyedArchiver.archivedData(withRootObject: currentModels)
-                UserDefaults.standard.set(archiver, forKey: DataManager.modelsDataKey)
-                UserDefaults.standard.synchronize()
-                
-                completionBlock()
-            }
+            self.addPost(post)
+            completionBlock(true)
         }
     }
     
     
-    // MARK: - Save model
+    // MARK: - Save post
     
-    func syncSaveModel(model: Model) {
+    /// Save updated post
+    ///
+    /// - Parameter post: post with changes
+    func saveAndUpdatePost(_ post: Post) {
         
-        if let currentModelsData = UserDefaults.standard.data(forKey: DataManager.modelsDataKey) {
+        if let currentPostsData = UserDefaults.standard.data(forKey: DataManager.postsDataKey) {
             
-            guard var currentModels = NSKeyedUnarchiver.unarchiveObject(with: currentModelsData) as? [Model]
+            guard var currentPosts = NSKeyedUnarchiver.unarchiveObject(with: currentPostsData) as? [Post]
                 else { return }
             
-            // find model and save changes locally
-            let index = currentModels.firstIndex { (oldModel) -> Bool in
-                oldModel.id == model.id
+            // find post and save changes locally
+            let index = currentPosts.firstIndex { (oldPost) -> Bool in
+                oldPost.id == post.id
             }
-            currentModels.insert(model, at: index ?? currentModels.count)
+            
+            if index == -1 {
+                currentPosts.insert(post, at: currentPosts.count)
+            }
+            else {
+                currentPosts.remove(at: index!)
+                currentPosts.insert(post, at: index!)
+            }
             
             // save changes in UserDefaults
-            let archiver = NSKeyedArchiver.archivedData(withRootObject: currentModelsData)
-            UserDefaults.standard.set(archiver, forKey: DataManager.modelsDataKey)
-            UserDefaults.standard.synchronize()
+            saveChangesInUserDefaults(data: currentPosts, dataKey: DataManager.postsDataKey)
         }
     }
     
-    func asyncSaveModel(model: Model, completionBlock: @escaping () -> (Bool)) {
+    /// Async version of saving of updated post
+    ///
+    /// - Parameters:
+    ///   - post: post with changes
+    ///   - completionBlock: for returing result of operations
+    func asyncSaveAndUpdatePost(_ post: Post, completionBlock: @escaping (Bool) -> ()) {
         saveOperationQueue.addOperation {
             
-            if let currentModelsData = UserDefaults.standard.data(forKey: DataManager.modelsDataKey) {
-                
-                guard var currentModels = NSKeyedUnarchiver.unarchiveObject(with: currentModelsData) as? [Model]
-                    else { return }
-                
-                // find model and save changes locally
-                let index = currentModels.firstIndex { (oldModel) -> Bool in
-                    oldModel.id == model.id
-                }
-                currentModels.insert(model, at: index ?? currentModels.count)
-                
-                // save changes in UserDefaults
-                let archiver = NSKeyedArchiver.archivedData(withRootObject: currentModelsData)
-                UserDefaults.standard.set(archiver, forKey: DataManager.modelsDataKey)
-                UserDefaults.standard.synchronize()
-                
-                completionBlock()
-            }
+            self.saveAndUpdatePost(post)
+            completionBlock(true)
         }
+    }
+    
+    
+    // MARK: - Save in UserDefaults
+    
+    /// Save data by key in UserDefaults
+    ///
+    /// - Parameters:
+    ///   - data: given data
+    ///   - dataKey: given key
+    func saveChangesInUserDefaults(data: Any, dataKey: String) {
+        
+        let archiver = NSKeyedArchiver.archivedData(withRootObject: data)
+        UserDefaults.standard.set(archiver, forKey: dataKey)
+        UserDefaults.standard.synchronize()
     }
     
 }

@@ -16,7 +16,7 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     let detailedPostSequeId = "detailedPost"
     
     var dataManager: DataManagerProtocol!
-    var posts: [Model]!
+    var posts: [Post]!
     
     /// Add refresher to the table
     lazy var refreshControl: UIRefreshControl = {
@@ -32,7 +32,7 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.addSubview(self.refreshControl)
+        tableView.addSubview(self.refreshControl)
         tableView.estimatedRowHeight = CGFloat(estimatedRowHeight)
         
         dataManager = DataManager()
@@ -41,8 +41,8 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        dataManager.obtainData { (models) in
-            self.posts = models
+        dataManager.obtainData { (posts) in
+            self.posts = posts
             self.tableView.reloadData()
         }
     }
@@ -70,8 +70,8 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     /// - Parameter refreshControl
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
                 
-        dataManager.obtainData { (models) in
-            self.posts = models
+        dataManager.obtainData { (posts) in
+            self.posts = posts
             self.tableView.reloadData()
             refreshControl.endRefreshing()
         }
@@ -85,11 +85,11 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == detailedPostSequeId, let post = sender as? Model {
+        if segue.identifier == detailedPostSequeId, let post = sender as? Post {
             
             let destinationController = segue.destination as! DetailedPostViewController
             
-            // Передача id для тестирования функции searchModel
+            // Передача id для тестирования функции searchPost
             destinationController.postId = post.id
         }
     }

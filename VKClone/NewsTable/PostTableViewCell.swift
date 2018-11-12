@@ -23,7 +23,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var viewsCountLabel: UILabel!
     
-    var parentViewController: UIViewController!
+    weak var parentViewController: UIViewController!
 
     // MARK: - Configure cell
   
@@ -32,7 +32,7 @@ class PostTableViewCell: UITableViewCell {
     /// - Parameters:
     ///   - post: given post
     ///   - parentVC: parent view controller
-    func congigureCell(with post: Model, parentVC: UIViewController) {
+    func congigureCell(with post: Post, parentVC: UIViewController) {
         
         parentViewController = parentVC
         

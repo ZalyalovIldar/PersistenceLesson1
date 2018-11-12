@@ -26,7 +26,7 @@ class DetailedPostViewController: UIViewController {
     
     var dataManager: DataManagerProtocol!
     var postId: String!
-    var post: Model!
+    var post: Post!
     
     @IBAction func didShareButtonPressed(_ sender: Any) {
         
@@ -47,7 +47,7 @@ class DetailedPostViewController: UIViewController {
         super.viewDidLoad()
 
         dataManager = DataManager()
-        post = dataManager.syncSearchModel(id: postId)
+        post = dataManager.searchPost(by: postId)
         
         congigureDetailedPost()
     }

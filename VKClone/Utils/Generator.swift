@@ -8,6 +8,7 @@
 
 import Foundation
 
+// This class contains features that generate news and user
 final class Generator {
         
     // MARK: - Generators
@@ -44,10 +45,10 @@ final class Generator {
     }
     
     
-    /// Generate random collection of models (posts)
+    /// Generate random collection of posts
     ///
     /// - Returns: return array of 20 random news posts
-    func generateAndSaveRandomModels() {
+    func generateAndSaveRandomPosts() {
         
         let postsCount = 30
         
@@ -67,10 +68,10 @@ final class Generator {
         let postImageLinks = ["postImage1", "PostImage2", "postImage3", ""]
         
         let randomRange = 5000
-        var posts: [Model] = []
+        var posts: [Post] = []
         
         for _ in 0...postsCount {
-            posts.append(Model(
+            posts.append(Post(
                 id: UUID().uuidString,
                 groupName: groupNames[Int(arc4random_uniform(UInt32(groupNames.count)))],
                 groupAvatar: groupAvatars[Int(arc4random_uniform(UInt32(groupAvatars.count)))],
@@ -83,17 +84,17 @@ final class Generator {
             ))
         }
         
-        let models = posts.filter { (post) in !(post.postImageLink == "" && post.postText == "") }
-        let archiver = NSKeyedArchiver.archivedData(withRootObject: models)
-        UserDefaults.standard.set(archiver, forKey: DataManager.modelsDataKey)
+        let resultPosts = posts.filter { (post) in !(post.postImageLink == "" && post.postText == "") }
+        let archiver = NSKeyedArchiver.archivedData(withRootObject: resultPosts)
+        UserDefaults.standard.set(archiver, forKey: DataManager.postsDataKey)
         UserDefaults.standard.synchronize()
     }
   
     
-    /// Generate random collection of models (posts)
+    /// Generate random collection of posts
     ///
     /// - Returns: return array of 20 random news posts
-    func generateRandomModel() -> Model {
+    func generateRandomPost() -> Post {
         
         let groupNames = ["Лентач", "ИНДЭ", "РГ"]
         let groupAvatars = ["groupAvatar1", "groupAvatar2"]
@@ -112,7 +113,7 @@ final class Generator {
         
         let randomRange = 5000
         
-        return Model(
+        return Post(
                 id: UUID().uuidString,
                 groupName: groupNames[Int(arc4random_uniform(UInt32(groupNames.count)))],
                 groupAvatar: groupAvatars[Int(arc4random_uniform(UInt32(groupAvatars.count)))],
