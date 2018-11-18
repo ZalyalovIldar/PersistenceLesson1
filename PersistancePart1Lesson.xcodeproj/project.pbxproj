@@ -7,21 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7C440CEC21887CC500948D09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C440CEB21887CC500948D09 /* AppDelegate.swift */; };
-		7C440CEE21887CC500948D09 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C440CED21887CC500948D09 /* ViewController.swift */; };
-		7C440CF121887CC500948D09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C440CEF21887CC500948D09 /* Main.storyboard */; };
-		7C440CF321887CC600948D09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C440CF221887CC600948D09 /* Assets.xcassets */; };
-		7C440CF621887CC600948D09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C440CF421887CC600948D09 /* LaunchScreen.storyboard */; };
+		CE2F7B9C21A18F6500D2FBDA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F7B9121A18F6500D2FBDA /* MainViewController.swift */; };
+		CE2F7B9D21A18F6500D2FBDA /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F7B9221A18F6500D2FBDA /* PostViewController.swift */; };
+		CE2F7B9E21A18F6500D2FBDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2F7B9321A18F6500D2FBDA /* Assets.xcassets */; };
+		CE2F7B9F21A18F6500D2FBDA /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F7B9421A18F6500D2FBDA /* CustomTableViewCell.swift */; };
+		CE2F7BA021A18F6500D2FBDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F7B9521A18F6500D2FBDA /* AppDelegate.swift */; };
+		CE2F7BA121A18F6500D2FBDA /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F7B9621A18F6500D2FBDA /* Post.swift */; };
+		CE2F7BA221A18F6500D2FBDA /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F7B9721A18F6500D2FBDA /* ShareViewController.swift */; };
+		CE2F7BA321A18F6500D2FBDA /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F7B9821A18F6500D2FBDA /* DataManager.swift */; };
+		CE2F7BA421A18F6500D2FBDA /* DataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F7B9921A18F6500D2FBDA /* DataProtocol.swift */; };
+		CE2F7BA521A18F6500D2FBDA /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = CE2F7B9A21A18F6500D2FBDA /* Base.lproj */; };
+		CE2F7BA621A18F6500D2FBDA /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2F7B9B21A18F6500D2FBDA /* Info.plist */; };
+		CE2F7BAA21A18FFC00D2FBDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE2F7BA821A18FFC00D2FBDA /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7C440CE821887CC500948D09 /* PersistancePart1Lesson.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PersistancePart1Lesson.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7C440CEB21887CC500948D09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7C440CED21887CC500948D09 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7C440CF021887CC500948D09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		7C440CF221887CC600948D09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7C440CF521887CC600948D09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		7C440CF721887CC600948D09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE2F7B9021A18F6400D2FBDA /* PersistancePart1Lesson-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PersistancePart1Lesson-Bridging-Header.h"; sourceTree = "<group>"; };
+		CE2F7B9121A18F6500D2FBDA /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		CE2F7B9221A18F6500D2FBDA /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		CE2F7B9321A18F6500D2FBDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CE2F7B9421A18F6500D2FBDA /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		CE2F7B9521A18F6500D2FBDA /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CE2F7B9621A18F6500D2FBDA /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		CE2F7B9721A18F6500D2FBDA /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		CE2F7B9821A18F6500D2FBDA /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		CE2F7B9921A18F6500D2FBDA /* DataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtocol.swift; sourceTree = "<group>"; };
+		CE2F7B9A21A18F6500D2FBDA /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
+		CE2F7B9B21A18F6500D2FBDA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE2F7BA921A18FFC00D2FBDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,12 +68,19 @@
 		7C440CEA21887CC500948D09 /* PersistancePart1Lesson */ = {
 			isa = PBXGroup;
 			children = (
-				7C440CEB21887CC500948D09 /* AppDelegate.swift */,
-				7C440CED21887CC500948D09 /* ViewController.swift */,
-				7C440CEF21887CC500948D09 /* Main.storyboard */,
-				7C440CF221887CC600948D09 /* Assets.xcassets */,
-				7C440CF421887CC600948D09 /* LaunchScreen.storyboard */,
-				7C440CF721887CC600948D09 /* Info.plist */,
+				CE2F7BA821A18FFC00D2FBDA /* Main.storyboard */,
+				CE2F7B9521A18F6500D2FBDA /* AppDelegate.swift */,
+				CE2F7B9321A18F6500D2FBDA /* Assets.xcassets */,
+				CE2F7B9A21A18F6500D2FBDA /* Base.lproj */,
+				CE2F7B9421A18F6500D2FBDA /* CustomTableViewCell.swift */,
+				CE2F7B9821A18F6500D2FBDA /* DataManager.swift */,
+				CE2F7B9921A18F6500D2FBDA /* DataProtocol.swift */,
+				CE2F7B9B21A18F6500D2FBDA /* Info.plist */,
+				CE2F7B9121A18F6500D2FBDA /* MainViewController.swift */,
+				CE2F7B9621A18F6500D2FBDA /* Post.swift */,
+				CE2F7B9221A18F6500D2FBDA /* PostViewController.swift */,
+				CE2F7B9721A18F6500D2FBDA /* ShareViewController.swift */,
+				CE2F7B9021A18F6400D2FBDA /* PersistancePart1Lesson-Bridging-Header.h */,
 			);
 			path = PersistancePart1Lesson;
 			sourceTree = "<group>";
@@ -96,6 +117,7 @@
 				TargetAttributes = {
 					7C440CE721887CC500948D09 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 0940;
 					};
 				};
 			};
@@ -122,9 +144,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C440CF621887CC600948D09 /* LaunchScreen.storyboard in Resources */,
-				7C440CF321887CC600948D09 /* Assets.xcassets in Resources */,
-				7C440CF121887CC500948D09 /* Main.storyboard in Resources */,
+				CE2F7BA521A18F6500D2FBDA /* Base.lproj in Resources */,
+				CE2F7B9E21A18F6500D2FBDA /* Assets.xcassets in Resources */,
+				CE2F7BA621A18F6500D2FBDA /* Info.plist in Resources */,
+				CE2F7BAA21A18FFC00D2FBDA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,28 +158,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C440CEE21887CC500948D09 /* ViewController.swift in Sources */,
-				7C440CEC21887CC500948D09 /* AppDelegate.swift in Sources */,
+				CE2F7BA221A18F6500D2FBDA /* ShareViewController.swift in Sources */,
+				CE2F7BA421A18F6500D2FBDA /* DataProtocol.swift in Sources */,
+				CE2F7BA021A18F6500D2FBDA /* AppDelegate.swift in Sources */,
+				CE2F7BA121A18F6500D2FBDA /* Post.swift in Sources */,
+				CE2F7BA321A18F6500D2FBDA /* DataManager.swift in Sources */,
+				CE2F7B9F21A18F6500D2FBDA /* CustomTableViewCell.swift in Sources */,
+				CE2F7B9D21A18F6500D2FBDA /* PostViewController.swift in Sources */,
+				CE2F7B9C21A18F6500D2FBDA /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		7C440CEF21887CC500948D09 /* Main.storyboard */ = {
+		CE2F7BA821A18FFC00D2FBDA /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7C440CF021887CC500948D09 /* Base */,
+				CE2F7BA921A18FFC00D2FBDA /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		7C440CF421887CC600948D09 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7C440CF521887CC600948D09 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -282,14 +303,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7Y74M59BAG;
 				INFOPLIST_FILE = PersistancePart1Lesson/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = projectCourse.PersistancePart1Lesson;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PersistancePart1Lesson/PersistancePart1Lesson-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -299,14 +325,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7Y74M59BAG;
 				INFOPLIST_FILE = PersistancePart1Lesson/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = projectCourse.PersistancePart1Lesson;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PersistancePart1Lesson/PersistancePart1Lesson-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
