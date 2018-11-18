@@ -18,16 +18,18 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     /// Идентификатор ячейки
     fileprivate let cellIdentifier = "cell"
     
-    /// массив постов
+    /// массив постов для таблицы
     var postsArray = [Post]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataManager = DataManager()        
+        dataManager = DataManager()
         ///заполняем массив постами
         postsArray = dataManager.getAllPostsSync()
+        
         /// Делаем размер ячейки динамичным
         tableView.estimatedRowHeight = 400
+        
         /// Добавляю рефрешер в таблице
         tableView.addSubview(refreshControl)
     }
@@ -37,23 +39,20 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! CustomTableViewCell
         cell.configureCell(post: postsArray[indexPath.row],index: indexPath.row, delegate: self)
-        
         return cell
     }
     
+    //click listener для кнопки добавления
     @IBAction func addPost(_ sender: Any) {
+        //добавляем новый пост в таблицу, используя асинхронный метод из dataManager'a
         dataManager.addPostAsync(post: Post(postId: 0, authorAvatar: #imageLiteral(resourceName: "iv1"), postImage: #imageLiteral(resourceName: "iv2"), authorName: "Timur Badretdinov", postDate: "02.04.1998", postText: "Although these classes actually can support the display of arbitrary amounts of text, labels and text fields are intended to be used for relatively small amounts of text, typically a single line. Text views, on the other hand, are meant to display large amounts of text."),
                                  completionBlock: { (isSuccess)  in
                                                     if !isSuccess {
                                                             print("Assync adding failed")
                                                                     }
                                                     })
-        
-        
-
     }
     
     
@@ -73,10 +72,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     ///
     /// - Parameter refreshControl: UIRefreshControl
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        //получаем массив постов
         self.postsArray = dataManager.getAllPostsSync()
         DispatchQueue.main.async { [unowned self] in
             self.tableView.reloadData()
-            
             refreshControl.endRefreshing()
             self.showToast(message: "Обновлено!")
         }

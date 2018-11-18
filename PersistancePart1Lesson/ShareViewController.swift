@@ -18,7 +18,9 @@ class ShareViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //инициализация менеджера через класс, реализующий протокол
         dataManager = DataManager()
+        //достаем пост, по айди, переданного с предыдущего окна
         post = dataManager.getPostSync(by: postId)
         ///отображение теста для шэринга
         tvSharedText.text = post.postText

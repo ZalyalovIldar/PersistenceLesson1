@@ -10,6 +10,7 @@ import UIKit
 
 class DataManager: PostDataProtocol  {
     
+    //constant for post key
     static var postKey = "key_post"
     
     // MARK: - Operation queues
@@ -33,11 +34,17 @@ class DataManager: PostDataProtocol  {
     }()
 
     // MARK: - Realization of methods
+    /// Returns post by id
+    ///
+    /// - Parameter id: post's id
     func getPostSync(by id: Int) -> Post? {
         let postsArray = (self.getAllPostsSync().filter{ post in post.postId == id})
         return postsArray.first
     }
     
+    /// Returns post by id asynchronously
+    ///
+    /// - Parameter id: post's id, competionBlock: block for returning data
     func getPostAsync(by id: Int, completionBlock: @escaping (Post?) -> Void) {
         getPostOperationQueue.addOperation{ [weak self] in
             guard let strongSelf = self else { return }
@@ -45,6 +52,9 @@ class DataManager: PostDataProtocol  {
         }
     }
     
+    /// Adding new post
+    ///
+    /// - Parameter post: new post to add
     func addPostSync(post: Post) {
         var allPosts:[Post] = self.getAllPostsSync()
         allPosts.append(post)
@@ -53,6 +63,9 @@ class DataManager: PostDataProtocol  {
         UserDefaults.standard.synchronize()
     }
     
+    /// Adding new post asynchronously
+    ///
+    /// - Parameter post: new post to add, competionBlock: block for returning data
     func addPostAsync(post: Post, completionBlock: @escaping (Bool) -> Void) {
         addOperationQueue.addOperation {
             self.addPostSync(post: post)
@@ -60,14 +73,20 @@ class DataManager: PostDataProtocol  {
         }
     }
     
+    /// Returns all posts
+    ///
+    ///
     func getAllPostsSync() -> [Post] {
         if let posts = UserDefaults.standard.data(forKey: DataManager.postKey){
-            guard let myposts = NSKeyedUnarchiver.unarchiveObject(with: posts) as? [Post] else {return []}
+            guard let myposts = NSKeyedUnarchiver.unarchiveObject(with: posts) as? [Post] else { return [] }
             return myposts
         }
         return []
     }
     
+    /// Returns all posts asynchronously
+    ///
+    /// - Parameter competionBlock: block for returning data
     func getAllPostsAsync(completionBlock: @escaping ([Post]) -> Void) {
         getAllPostsOperationQueue.addOperation{ [weak self] in
             guard let strongSelf = self else { return }
@@ -75,9 +94,12 @@ class DataManager: PostDataProtocol  {
         }
     }
     
+    /// Returns count of posts
+    ///
+    ///
     func getCount() -> Int {
         if let posts = UserDefaults.standard.data(forKey: DataManager.postKey){
-            guard let posts = NSKeyedUnarchiver.unarchiveObject(with: posts) as? [Post] else {return 0}
+            guard let posts = NSKeyedUnarchiver.unarchiveObject(with: posts) as? [Post] else { return 0 }
             return posts.count
         }
         return 0

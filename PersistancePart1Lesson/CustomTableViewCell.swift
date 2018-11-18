@@ -40,6 +40,11 @@ class CustomTableViewCell: UITableViewCell {
         self.delegate = delegate
         self.index = index
     }
+    
+    
+    /// Click listener для открывания SharingScreen
+    ///
+    ///
     @IBAction func openSharingScreen(_ sender: Any) {
         delegate?.didPressInfoButton(index: index)
     }

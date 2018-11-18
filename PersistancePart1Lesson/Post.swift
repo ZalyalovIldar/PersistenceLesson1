@@ -26,6 +26,7 @@ class Post: NSObject, NSCoding {
         self.postText = postText
     }
     
+    //кодирование модели для дальнейшей возможности добавления в UserDefaults
     func encode(with aCoder: NSCoder) {
         aCoder.encode(postId, forKey: #keyPath(Post.postId))
         aCoder.encode(authorAvatar, forKey: #keyPath(Post.authorAvatar))
@@ -35,6 +36,7 @@ class Post: NSObject, NSCoding {
         aCoder.encode(postText, forKey: #keyPath(Post.postText))
     }
     
+    //декодирование модели для возможности изъятия из UserDefaults
     required init?(coder aDecoder: NSCoder) {
         postId = aDecoder.decodeInteger(forKey: #keyPath(Post.postId))
         authorAvatar = aDecoder.decodeObject(forKey: #keyPath(Post.authorAvatar)) as! UIImage
