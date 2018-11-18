@@ -12,20 +12,20 @@ import UIKit
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CustomCellDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    let dataManager = DataManager.sharedInstance
+    var dataManager: PostDataProtocol!
     
 
     /// Идентификатор ячейки
     fileprivate let cellIdentifier = "cell"
     
     /// массив постов
-    var postsArray = [PostModel]()
+    var postsArray = [Post]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        dataManager = DataManager()        
         ///заполняем массив постами
-       postsArray = DataManager.sharedInstance.postsArray
+        postsArray = dataManager.getAllPostsSync()
         /// Делаем размер ячейки динамичным
         tableView.estimatedRowHeight = 400
         /// Добавляю рефрешер в таблице
@@ -45,11 +45,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func addPost(_ sender: Any) {
-        dataManager.addPostAsync(postModel: PostModel(postId: dataManager.postsArray.count + 1, authorAvatar: #imageLiteral(resourceName: "iv1"), postImage: #imageLiteral(resourceName: "iv2"), authorName: "Timur Badretdinov", postDate: "02.04.1998", postText: "Although these classes actually can support the display of arbitrary amounts of text, labels and text fields are intended to be used for relatively small amounts of text, typically a single line. Text views, on the other hand, are meant to display large amounts of text."), completionBlock: { (isSuccess)  in
-            if !isSuccess {
-                print("Assync adding failed")
-            }
-        })
+        dataManager.addPostAsync(post: Post(postId: 0, authorAvatar: #imageLiteral(resourceName: "iv1"), postImage: #imageLiteral(resourceName: "iv2"), authorName: "Timur Badretdinov", postDate: "02.04.1998", postText: "Although these classes actually can support the display of arbitrary amounts of text, labels and text fields are intended to be used for relatively small amounts of text, typically a single line. Text views, on the other hand, are meant to display large amounts of text."),
+                                 completionBlock: { (isSuccess)  in
+                                                    if !isSuccess {
+                                                            print("Assync adding failed")
+                                                                    }
+                                                    })
+        
+        
+
     }
     
     
@@ -69,11 +73,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     ///
     /// - Parameter refreshControl: UIRefreshControl
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        dataManager.getAllPostsAsync { (posts)  in
-            self.postsArray = posts
-            DispatchQueue.main.async { [unowned self] in
-                self.tableView.reloadData() // не получилось починить предупреждение((
-            }
+        self.postsArray = dataManager.getAllPostsSync()
+        DispatchQueue.main.async { [unowned self] in
+            self.tableView.reloadData()
+            
             refreshControl.endRefreshing()
             self.showToast(message: "Обновлено!")
         }
@@ -119,12 +122,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     ///
     /// - Parameters:
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "detailSegue", let post = sender as? PostModel {
+        if segue.identifier == "detailSegue", let post = sender as? Post {
             let destinationController = segue.destination as! PostViewController
             destinationController.postId = post.postId
         }
         
-        if segue.identifier == "shareSegue", let post = sender as? PostModel {
+        if segue.identifier == "shareSegue", let post = sender as? Post {
             let destinationController = segue.destination as! ShareViewController
             destinationController.postId = post.postId
         }

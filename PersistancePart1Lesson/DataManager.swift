@@ -9,14 +9,8 @@
 import UIKit
 
 class DataManager: PostDataProtocol  {
-
-    static let sharedInstance = DataManager()
-    var postsArray: [PostModel] = []
     
-    init(){
-        postsArray.append(PostModel(postId: 0, authorAvatar: #imageLiteral(resourceName: "iv1"), postImage: #imageLiteral(resourceName: "iv2"), authorName: "Timur Badretdinov", postDate: "02.04.1998", postText: "Although these classes actually can support the display of arbitrary amounts of text, labels and text fields are intended to be used for relatively small amounts of text, typically a single line. Text views, on the other hand, are meant to display large amounts of text."))
-    }
-    
+    static var postKey = "key_post"
     
     // MARK: - Operation queues
     private lazy var getPostOperationQueue: OperationQueue = {
@@ -39,37 +33,53 @@ class DataManager: PostDataProtocol  {
     }()
 
     // MARK: - Realization of methods
-    func getPostSync(by id: Int) -> PostModel? {
-        postsArray = postsArray.filter{ post in post.postId == id}
+    func getPostSync(by id: Int) -> Post? {
+        let postsArray = (self.getAllPostsSync().filter{ post in post.postId == id})
         return postsArray.first
     }
     
-    func getPostAsync(by id: Int, completionBlock: @escaping (PostModel?) -> Void) {
+    func getPostAsync(by id: Int, completionBlock: @escaping (Post?) -> Void) {
         getPostOperationQueue.addOperation{ [weak self] in
             guard let strongSelf = self else { return }
-            completionBlock(strongSelf.postsArray.filter{ post in post.postId == id}.first)
+            completionBlock(strongSelf.getPostSync(by: id))
         }
     }
     
-    func addPostSync(postModel: PostModel) {
-        postsArray.append(postModel)
+    func addPostSync(post: Post) {
+        var allPosts:[Post] = self.getAllPostsSync()
+        allPosts.append(post)
+        let archiver = NSKeyedArchiver.archivedData(withRootObject: allPosts)
+        UserDefaults.standard.set(archiver, forKey: DataManager.postKey)
+        UserDefaults.standard.synchronize()
     }
     
-    func addPostAsync(postModel: PostModel, completionBlock: @escaping (Bool) -> Void) {
+    func addPostAsync(post: Post, completionBlock: @escaping (Bool) -> Void) {
         addOperationQueue.addOperation {
-            self.addPostSync(postModel: postModel)
+            self.addPostSync(post: post)
             completionBlock(true)
         }
     }
     
-    func getAllPostsSync() -> [PostModel] {
-        return postsArray
+    func getAllPostsSync() -> [Post] {
+        if let posts = UserDefaults.standard.data(forKey: DataManager.postKey){
+            guard let myposts = NSKeyedUnarchiver.unarchiveObject(with: posts) as? [Post] else {return []}
+            return myposts
+        }
+        return []
     }
     
-    func getAllPostsAsync(completionBlock: @escaping ([PostModel]) -> Void) {
+    func getAllPostsAsync(completionBlock: @escaping ([Post]) -> Void) {
         getAllPostsOperationQueue.addOperation{ [weak self] in
             guard let strongSelf = self else { return }
-            completionBlock(strongSelf.postsArray)
+            completionBlock(strongSelf.getAllPostsSync())
         }
+    }
+    
+    func getCount() -> Int {
+        if let posts = UserDefaults.standard.data(forKey: DataManager.postKey){
+            guard let posts = NSKeyedUnarchiver.unarchiveObject(with: posts) as? [Post] else {return 0}
+            return posts.count
+        }
+        return 0
     }
 }

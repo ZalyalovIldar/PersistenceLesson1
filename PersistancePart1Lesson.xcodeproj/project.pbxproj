@@ -12,7 +12,7 @@
 		CE2F7B9E21A18F6500D2FBDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE2F7B9321A18F6500D2FBDA /* Assets.xcassets */; };
 		CE2F7B9F21A18F6500D2FBDA /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F7B9421A18F6500D2FBDA /* CustomTableViewCell.swift */; };
 		CE2F7BA021A18F6500D2FBDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F7B9521A18F6500D2FBDA /* AppDelegate.swift */; };
-		CE2F7BA121A18F6500D2FBDA /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F7B9621A18F6500D2FBDA /* PostModel.swift */; };
+		CE2F7BA121A18F6500D2FBDA /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F7B9621A18F6500D2FBDA /* Post.swift */; };
 		CE2F7BA221A18F6500D2FBDA /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F7B9721A18F6500D2FBDA /* ShareViewController.swift */; };
 		CE2F7BA321A18F6500D2FBDA /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F7B9821A18F6500D2FBDA /* DataManager.swift */; };
 		CE2F7BA421A18F6500D2FBDA /* DataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F7B9921A18F6500D2FBDA /* DataProtocol.swift */; };
@@ -29,7 +29,7 @@
 		CE2F7B9321A18F6500D2FBDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE2F7B9421A18F6500D2FBDA /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		CE2F7B9521A18F6500D2FBDA /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CE2F7B9621A18F6500D2FBDA /* PostModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
+		CE2F7B9621A18F6500D2FBDA /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		CE2F7B9721A18F6500D2FBDA /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		CE2F7B9821A18F6500D2FBDA /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		CE2F7B9921A18F6500D2FBDA /* DataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProtocol.swift; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 				CE2F7B9921A18F6500D2FBDA /* DataProtocol.swift */,
 				CE2F7B9B21A18F6500D2FBDA /* Info.plist */,
 				CE2F7B9121A18F6500D2FBDA /* MainViewController.swift */,
-				CE2F7B9621A18F6500D2FBDA /* PostModel.swift */,
+				CE2F7B9621A18F6500D2FBDA /* Post.swift */,
 				CE2F7B9221A18F6500D2FBDA /* PostViewController.swift */,
 				CE2F7B9721A18F6500D2FBDA /* ShareViewController.swift */,
 				CE2F7B9021A18F6400D2FBDA /* PersistancePart1Lesson-Bridging-Header.h */,
@@ -161,7 +161,7 @@
 				CE2F7BA221A18F6500D2FBDA /* ShareViewController.swift in Sources */,
 				CE2F7BA421A18F6500D2FBDA /* DataProtocol.swift in Sources */,
 				CE2F7BA021A18F6500D2FBDA /* AppDelegate.swift in Sources */,
-				CE2F7BA121A18F6500D2FBDA /* PostModel.swift in Sources */,
+				CE2F7BA121A18F6500D2FBDA /* Post.swift in Sources */,
 				CE2F7BA321A18F6500D2FBDA /* DataManager.swift in Sources */,
 				CE2F7B9F21A18F6500D2FBDA /* CustomTableViewCell.swift in Sources */,
 				CE2F7B9D21A18F6500D2FBDA /* PostViewController.swift in Sources */,

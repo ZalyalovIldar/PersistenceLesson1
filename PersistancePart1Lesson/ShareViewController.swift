@@ -11,13 +11,14 @@ import UIKit
 class ShareViewController: UIViewController {
     
     @IBOutlet weak var tvSharedText: UILabel!
-    let dataManager = DataManager.sharedInstance
+    var dataManager: PostDataProtocol!
     
-    var post: PostModel!
+    var post: Post!
     var postId: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataManager = DataManager()
         post = dataManager.getPostSync(by: postId)
         ///отображение теста для шэринга
         tvSharedText.text = post.postText

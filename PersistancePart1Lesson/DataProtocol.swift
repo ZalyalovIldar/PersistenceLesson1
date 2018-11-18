@@ -9,12 +9,14 @@
 import UIKit
 
 protocol PostDataProtocol {
-    func getPostSync(by id: Int) -> PostModel?
-    func getPostAsync(by id: Int, completionBlock: @escaping (PostModel?) -> Void)
+    func getPostSync(by id: Int) -> Post?
+    func getPostAsync(by id: Int, completionBlock: @escaping (Post?) -> Void)
     
-    func addPostSync(postModel: PostModel)
-    func addPostAsync(postModel: PostModel, completionBlock: @escaping (Bool) -> Void)
+    func addPostSync(post: Post)
+    func addPostAsync(post: Post, completionBlock: @escaping (Bool) -> Void)
     
-    func getAllPostsSync() -> [PostModel]
-    func getAllPostsAsync(completionBlock: @escaping ([PostModel]) -> Void) -> Void
+    func getAllPostsSync() -> [Post]
+    func getAllPostsAsync(completionBlock: @escaping ([Post]) -> Void) -> Void
+    
+    func getCount() -> Int
 }
