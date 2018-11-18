@@ -10,6 +10,9 @@ import UIKit
 
 class ShareViewController: UIViewController {
     
+    /// Константы
+    fileprivate let savedMessage = "saved to clipboard"
+    
     @IBOutlet weak var tvSharedText: UILabel!
     var dataManager: PostDataProtocol!
     
@@ -30,7 +33,7 @@ class ShareViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         ///выводим на экран сообщение о сохранении
-        showToast(message: "saved to clipboard")
+        showToast(message: savedMessage)
     }
     
     /// Отображение сообщения
