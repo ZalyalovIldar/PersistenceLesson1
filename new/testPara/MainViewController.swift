@@ -9,12 +9,29 @@
 import UIKit
 import Foundation
 
-struct Post{
-    var imagePost: UIImage
-    var textPost: String
+class Post:NSObject, NSCoding{
+   
+    
+    @objc var imagePost: UIImage
+    @objc var textPost: String
+     init(imagePost: UIImage, textPost: String) {
+        self.imagePost = imagePost
+        self.textPost = textPost
+    }
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(imagePost, forKey: #keyPath(Post.imagePost))
+        aCoder.encode(textPost, forKey: #keyPath(Post.textPost))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        imagePost = aDecoder.decodeObject(forKey: #keyPath(Post.imagePost)) as! UIImage
+        textPost = aDecoder.decodeObject(forKey: #keyPath(Post.textPost)) as! String
+    }
 }
 
-    var dataManager: DataStorage = DataStorage()
+
+    var dataManager: Data!
+
     var sum = dataManager.ObtainRandomPhoto()
 
 
@@ -60,6 +77,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         for _ in 0..<count
         {
+            
             dataArray.append(Post(imagePost:dataManager.ObtainRandomPhoto() , textPost: dataManager.ObtainRandomName()))
             tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: UITableViewRowAnimation.top)
         }
@@ -81,6 +99,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataManager=DataStorage()
         navigationItem.rightBarButtonItem = editButtonItem
         tableView.estimatedRowHeight = 50
         tableView.delegate = self
@@ -137,8 +156,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     /// Нажатие кнопки, открытие новой вьюхи
     func didPressInfoButton() {
-    
-       let model = Post(imagePost: dataManager.ObtainRandomPhoto(), textPost: dataManager.ObtainRandomName())
+       
+        let model = Post(imagePost:dataManager.ObtainRandomPhoto() , textPost: dataManager.ObtainRandomName())
+        
         
         performSegue(withIdentifier: "detailSegue", sender: model)
     }

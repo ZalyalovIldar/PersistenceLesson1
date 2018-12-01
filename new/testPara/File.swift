@@ -51,18 +51,12 @@ protocol Data{
     
 }
 
-class DataStorage:NSObject, Data, NSCoding {
-    func encode(with aCoder: NSCoder) {
-        <#code#>
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        <#code#>
-    }
+class DataStorage:Data {
     
     
     
-    var dataArray: [Post] = []
+    
+    var dataArray = [Post]()
     
     /// Асинхронное получение данных
     ///
@@ -72,12 +66,12 @@ class DataStorage:NSObject, Data, NSCoding {
         let operation = OperationQueue.init()
         operation.addOperation { [weak self] in
             
-            guard self != nil else { return }
-            
+            guard self != nil  else { return }
             let dataArray = [Post](repeating: Post(imagePost: self!.ObtainRandomPhoto(), textPost: self!.ObtainRandomName()), count: 20)
-            storage = dataArray
-            
             completion(dataArray)
+            
+          // let dataArray = [Post](repeating: Post(imagePost: self!.ObtainRandomPhoto(), textPost: self!.ObtainRandomName()), count: 20)
+            
         }
     }
     /// Синхронное получение данных
@@ -85,7 +79,7 @@ class DataStorage:NSObject, Data, NSCoding {
     /// - Returns: возвращает массив постов
     func syncObtainData() -> [Post] {
         
-        let dataArray = [Post](repeating: Post(imagePost: self.ObtainRandomPhoto() , textPost: self.ObtainRandomName()), count: 20)
+        //let dataArray = [Post](repeating: Post(imagePost: self.ObtainRandomPhoto() , textPost: self.ObtainRandomName()), count: 20)
         return dataArray
     }
     ///   Асинхронное сохранение данных
