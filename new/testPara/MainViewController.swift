@@ -50,6 +50,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }()
     var dataArray: [Post] = []
     
+    
     @IBOutlet weak var tableView: UITableView!
 
     /// Сохранение данных и их печать
@@ -58,6 +59,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func saveDataButton(_ sender: Any) {
         dataManager.asyncSaveData { [unowned self](postArray) in
             self.dataArray=postArray
+            
+           
+            let pending = UIAlertController(title: "Successful saving", message: "Your data was saved. Search it in console", preferredStyle: .alert)
+            let indicator = UIActivityIndicatorView()
+            pending.view.addSubview(indicator)
+            indicator.isUserInteractionEnabled = false
+            self.present(pending, animated: true, completion: nil)
+            let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+            pending.addAction(ok)
         }
     }
     
@@ -67,6 +77,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     /// То что просиходит при свайпе вниз(обновление данных)
+   
     @objc func requestData() {
         let count = dataArray.count
         for _ in 0..<dataArray.count
@@ -108,11 +119,36 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         readData()
         dataManager.asyncObtainData { [unowned self](postArray) in
             self.dataArray = postArray
+            let archiver = NSKeyedArchiver.archivedData(withRootObject: self.dataArray )
+            UserDefaults.standard.set(archiver, forKey: "key")
+            UserDefaults.standard.synchronize()
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+           
         }
     }
+        
+        
 }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
+        
+        if let curArrData = UserDefaults.standard.data(forKey: "key") {
+            guard let curArr = NSKeyedUnarchiver.unarchiveObject(with: curArrData) as? [Post] else {return}
+            
+            for i in curArr
+            {
+                print("___________________________________________________")
+                print(i)
+                print("___________________________________________________")
+            }
+            
+        }
+     
+    }
     func readData() {
         if let dataFile = Bundle.main.path(forResource: "testprop", ofType: "plist") {
             let dataDict = NSDictionary (contentsOfFile: dataFile)

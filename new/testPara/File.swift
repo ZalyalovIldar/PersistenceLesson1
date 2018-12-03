@@ -71,7 +71,7 @@ class DataStorage:Data {
             completion(dataArray)
             
           // let dataArray = [Post](repeating: Post(imagePost: self!.ObtainRandomPhoto(), textPost: self!.ObtainRandomName()), count: 20)
-            
+            storage = dataArray
         }
     }
     /// Синхронное получение данных
@@ -144,3 +144,5 @@ class DataStorage:Data {
         storage = []
     }
 }
+
+ 
